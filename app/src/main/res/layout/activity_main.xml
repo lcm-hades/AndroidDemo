@@ -1,0 +1,61 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+        <com.hades.Sample.MoveImageView.HMoveImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/a"
+            android:layout_marginTop="100dp"
+            android:id="@+id/move_iv"
+            android:visibility="gone"/>
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:id="@+id/icon"/>
+
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="相册"
+        android:id="@+id/photo"
+        android:visibility="gone"/>
+
+    <com.hades.Sample.HTabBar
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:id="@+id/tabbar"></com.hades.Sample.HTabBar>
+
+
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/start"
+        android:text="开启修哪儿"
+        android:visibility="gone"/>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/main_list"
+        android:layoutAnimation="@anim/list_anim_layout"
+        android:layout_below="@+id/tabbar">
+
+    </ListView>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="拍照"
+        android:layout_marginTop="50dp"
+        android:id="@+id/camera"
+        android:visibility="visible"/>
+</RelativeLayout>

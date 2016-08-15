@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.hades.Sample">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <receiver android:name="com.hades.Sample.Receiver.CustomReceiver">
+            <intent-filter>
+                <action android:name="com.hades.picture.Receiver.CustomReceiver" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.hades.Sample.Receiver.ForceOfflineReceiver">
+            <intent-filter>
+                <action android:name="com.hades.picture.broadcastbestpractice.FORCE_OFFLINE" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name="com.hades.Sample.act.MainActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.hades.Sample.RedPacketActivity"
+            android:label="@string/title_activity_red_packet"></activity>
+        <activity
+            android:name="com.hades.Sample.act.AddressActivity"
+            android:label="@string/title_activity_address"></activity>
+        <activity
+            android:name="com.hades.Sample.act.Mp3Activity"
+            android:label="@string/title_activity_mp3"></activity>
+        <activity
+            android:name="com.hades.Sample.act.CircleProgressActivity"
+            android:label="@string/title_activity_circle"></activity>
+        <activity
+            android:name="com.hades.Sample.act.AuthButtonActivity"
+            android:label="@string/title_activity_auth_button"></activity>
+        <activity
+            android:name="com.hades.Sample.act.DBActivity"
+            android:label="@string/title_activity_db"></activity>
+        <activity
+            android:name="com.hades.Sample.act.ExcelActivity"
+            android:label="@string/title_activity_excel"></activity>
+        <activity
+            android:name="com.hades.Sample.act.BroadCastActivity"
+            android:label="@string/title_activity_broad_cast"></activity>
+        <activity
+            android:name="com.hades.Sample.act.ForceOfflineActivity"
+            android:label="@string/title_activity_force_offline"></activity>
+        <activity
+            android:name="com.hades.Sample.act.OfflineMainActivity"
+            android:label="@string/title_activity_offline_main"></activity>
+        <activity
+            android:name="com.hades.Sample.act.CustomCameraActivity"
+            android:label="@string/title_activity_custom_camera"></activity>
+        <activity
+            android:name="com.hades.Sample.act.RealCustomCameraActivity"
+            android:label="@string/title_activity_real_custom_camera"></activity>
+        <activity
+            android:name="com.hades.Sample.act.AnimationActivity"
+            android:label="@string/title_activity_animation"></activity>
+        <activity
+            android:name="com.hades.Sample.act.AlbumListActivity"
+            android:label="@string/title_activity_album_list"></activity>
+        <activity
+            android:name="com.hades.Sample.act.AliOrderActivity"
+            android:label="@string/title_activity_ali_order"></activity>
+        <activity
+            android:name="com.hades.Sample.act.GsonActivity"
+            android:label="@string/title_activity_gson"></activity>
+        <activity
+            android:name="com.hades.Sample.act.WebViewActivity"
+            android:label="@string/title_activity_web_view"></activity>
+        <activity
+            android:name="com.hades.Sample.act.MainTestActivity"
+            android:label="@string/title_activity_main_test"></activity>
+
+
+        <activity
+            android:name="com.hades.Sample.act.XUtilsViewActivity"
+            android:label="@string/title_activity_xutils_view"
+            android:configChanges="orientation|screenSize"></activity>
+
+
+        <activity
+            android:name="com.hades.Sample.act.PullToRerfeshActivity"
+            android:label="@string/title_activity_pull_to_rerfesh"></activity>
+        <activity
+            android:name="com.hades.Sample.act.RecyclerViewActivity"
+            android:label="@string/title_activity_recycler_view"></activity>
+        <activity
+            android:name="com.hades.Sample.act.PickImageActivity"
+            android:label="@string/title_activity_pick_image"></activity>
+
+
+        <activity
+            android:name="com.hades.Sample.act.ImageGridActivity"
+            android:label="@string/title_activity_pick_image"></activity>
+        <activity
+            android:name="com.hades.Sample.act.PhotoActivity"
+            android:label="@string/title_activity_pick_image"></activity>
+    </application>
+
+</manifest>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="white">#ffffffff</color>
+    <color name="xiunaer">#ff9732</color>
+    <color name="top_color">#ff9732</color>
+    <color name="top_title_color">#ffffffff</color>
+    <color name="a6">#a6a6a6</color>
+    <color name="transparent">#00000000</color>
+</resources>
