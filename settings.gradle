@@ -1,1 +1,1 @@
-include ':app', ':Application', ':jni-hello', ':moocDetailsEffect', ':circularcornerdialogdemo'
+include ':app', ':Application', ':jni-hello', ':moocDetailsEffect', ':circularcornerdialogdemo', ':updatedownload'

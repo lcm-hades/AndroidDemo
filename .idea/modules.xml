@@ -8,6 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/circularcornerdialogdemo/circularcornerdialogdemo.iml" filepath="$PROJECT_DIR$/circularcornerdialogdemo/circularcornerdialogdemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/jni-hello/jni-hello.iml" filepath="$PROJECT_DIR$/jni-hello/jni-hello.iml" />
       <module fileurl="file://$PROJECT_DIR$/moocDetailsEffect/moocDetailsEffect.iml" filepath="$PROJECT_DIR$/moocDetailsEffect/moocDetailsEffect.iml" />
+      <module fileurl="file://$PROJECT_DIR$/updatedownload/updatedownload.iml" filepath="$PROJECT_DIR$/updatedownload/updatedownload.iml" />
     </modules>
   </component>
 </project>
