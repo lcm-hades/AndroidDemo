@@ -37,7 +37,6 @@ public class UpdateDownloadRequest implements Runnable {
 
     @Override
     public void run() {
-
         try {
             makeRequest();
         }catch (IOException e){
@@ -103,8 +102,6 @@ public class UpdateDownloadRequest implements Runnable {
                 public void handleMessage(Message msg) {
                     handleSelfMessage(msg);
                 }
-
-
             };
         }
 
@@ -115,10 +112,12 @@ public class UpdateDownloadRequest implements Runnable {
 
         private void sendProgressChangedMessage(int progress){
             sendMessage(obtainMessage(PROGRESS_CHANGED, new Object[]{progress}));
+            onProgressChanged(progress);
         }
 
         private void sendFailureMessage(FailureCode failureCode){
             sendMessage(obtainMessage(FAILURE_MESSAGE, new Object[]{failureCode}));
+            onFailure(failureCode);
         }
 
         protected void sendMessage(Message msg){
@@ -161,11 +160,23 @@ public class UpdateDownloadRequest implements Runnable {
         }
 
         protected void handleFailureMessage(FailureCode code){
+            onFailure(code);
+        }
 
+        protected void onStarted(){
+            downloadListener.onStarted();
+        }
+
+        protected void onProgressChanged(int progress){
+            downloadListener.onProgressChanged(progress, "");
+        }
+
+        protected void onFailure(FailureCode code){
+            downloadListener.onFailure();
         }
 
         protected void onFinish(){
-
+            downloadListener.onFinished(mCompleteSize, downloadUrl);
         }
 
         // 文件下载方法，
