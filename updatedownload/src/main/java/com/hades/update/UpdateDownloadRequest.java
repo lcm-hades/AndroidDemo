@@ -3,6 +3,7 @@ package com.hades.update;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,7 +28,7 @@ public class UpdateDownloadRequest implements Runnable {
     private DownloadRequestHandler downloadRequestHandler;
 
     public UpdateDownloadRequest(String downloadUrl, String localFilePath, UpdateDownloadListener listener){
-
+        Log.i("test", "UpdateDownloadRequest " + downloadUrl);
         this.downloadUrl = downloadUrl;
         this.localFilePath = localFilePath;
         this.downloadListener = listener;
@@ -40,28 +41,39 @@ public class UpdateDownloadRequest implements Runnable {
         try {
             makeRequest();
         }catch (IOException e){
-
+            downloadRequestHandler.sendFailureMessage(FailureCode.IO);
         }catch (InterruptedException e){
-
+            downloadRequestHandler.sendFailureMessage(null);
         }
 
     }
 
     private void makeRequest() throws IOException, InterruptedException{
+        Log.i("test", "before makeRequest");
         if (!Thread.currentThread().isInterrupted()){
+            HttpURLConnection connection = null;
             try {
                 URL url = new URL(downloadUrl);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("GET");
                 connection.setConnectTimeout(5000);
                 connection.setRequestProperty("Connection", "Keep-Alive");
                 connection.connect();
                 currentLength = connection.getContentLength();
                 if (!Thread.currentThread().isInterrupted()){
+                    Log.i("test", "makeRequest");
                     downloadRequestHandler.sendRespondMessage(connection.getInputStream());
                 }
             }catch (IOException e){
+                Log.i("test", "dddddddddddddddddddddd");
                 throw e;
+            }catch (Exception e){
+                Log.i("test", "aaaaaaaaaaaaaaaaaaaaa   " + e.getMessage());
+             throw e;
+            }finally {
+                if (connection != null){
+                    connection.disconnect();
+                }
             }
         }
     }
@@ -112,12 +124,10 @@ public class UpdateDownloadRequest implements Runnable {
 
         private void sendProgressChangedMessage(int progress){
             sendMessage(obtainMessage(PROGRESS_CHANGED, new Object[]{progress}));
-            onProgressChanged(progress);
         }
 
         private void sendFailureMessage(FailureCode failureCode){
             sendMessage(obtainMessage(FAILURE_MESSAGE, new Object[]{failureCode}));
-            onFailure(failureCode);
         }
 
         protected void sendMessage(Message msg){
@@ -149,8 +159,7 @@ public class UpdateDownloadRequest implements Runnable {
                     break;
                 case PROGRESS_CHANGED:
                     response = (Object[])msg.obj;
-                    sendProgressChangedMessage(
-                            ((Integer)response[0]).intValue());
+                    onProgressChanged(((Integer)response[0]).intValue());
                     break;
                 case FINISH_MESSAGE:
                     onFinish();
@@ -181,6 +190,7 @@ public class UpdateDownloadRequest implements Runnable {
 
         // 文件下载方法，
         void sendRespondMessage(InputStream is){
+            Log.i("test", "sendRespondMessage");
             RandomAccessFile randomAccessFile = null;
             mCompleteSize = 0;
             try{
@@ -188,17 +198,17 @@ public class UpdateDownloadRequest implements Runnable {
                 int length = -1;
                 int limit = 0;
                 randomAccessFile = new RandomAccessFile(localFilePath, "rwd");
+                onStarted();
                 while ((length = is.read(buffer)) != -1){
                     randomAccessFile.write(buffer, 0, length);
                     mCompleteSize += length;
                     if (mCompleteSize < currentLength){
-                        progress = (int) Float.parseFloat(
-                                getTwoPointFloatStr(mCompleteSize / currentLength));
-                        if (limit/30 == 0 || progress <= 100){
+                        progress = (int) (Float.parseFloat(
+                                getTwoPointFloatStr(mCompleteSize * 1.0f / currentLength)) * 100);
+                        if (limit % 3 == 0 && progress <= 100){
                             // 为了限制一下notification的更新频率
                             sendProgressChangedMessage(progress);
                         }
-
                         limit++;
                     }
                 }
